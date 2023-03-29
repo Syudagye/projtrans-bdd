@@ -60,7 +60,7 @@ CREATE TABLE Accessibilite(
    label_accessibilite VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Option(
+CREATE TABLE OptionHebergement(
    id_option INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label_option VARCHAR(255) NOT NULL
 );
@@ -256,7 +256,7 @@ CREATE TABLE Personnaliser(
    id_option INTEGER NOT NULL,
    PRIMARY KEY(id_hebergement, id_option),
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id_hebergement),
-   FOREIGN KEY(id_option) REFERENCES Option(id_option)
+   FOREIGN KEY(id_option) REFERENCES OptionHebergement(id_option)
 );
 
 CREATE TABLE Categoriser(
