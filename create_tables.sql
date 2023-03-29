@@ -148,7 +148,6 @@ CREATE TABLE Reservation(
    payee BOOLEAN NOT NULL,
    id_utilisateur INTEGER NOT NULL,
    id_hebergement INTEGER NOT NULL,
-   PRIMARY KEY(id_reservation),
    FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id_hebergement)
 );
@@ -204,7 +203,6 @@ CREATE TABLE Avis(
    reponse_hote LONGTEXT,
    id_reservation INT NOT NULL,
    id_hebergement INT NOT NULL,
-   PRIMARY KEY(id_avis),
    UNIQUE(id_reservation),
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id_reservation),
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id_hebergement)
