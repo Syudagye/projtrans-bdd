@@ -21,53 +21,53 @@ CREATE TABLE Utilisateur(
    est_admin BOOLEAN NOT NULL,
    societe VARCHAR(255),
    adresse_postale VARCHAR(255) NOT NULL,
-   photo_utilisateur VARCHAR(255) NOT NULL,
+   photo_utilisateur VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE TypeHebergement(
    id_type_hebergement INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   type_hebergement VARCHAR(255) NOT NULL,
+   type_hebergement VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE CategorieBien(
    id_categorie_bien INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   type_bien VARCHAR(255) NOT NULL,
+   type_bien VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Service(
    id_service INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   type_service VARCHAR(255) NOT NULL,
+   type_service VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Equipement(
    id_equipement INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label_equipement VARCHAR(255) NOT NULL,
-   type_equipement VARCHAR(255) NOT NULL,
+   type_equipement VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Classement(
    id_classement INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label_classement VARCHAR(255) NOT NULL,
+   label_classement VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE ThemeSejour(
    id_theme_sejour INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label_theme_sejour VARCHAR(255) NOT NULL,
+   label_theme_sejour VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Accessibilite(
    id_accessible INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label_accessibilite VARCHAR(255) NOT NULL,
+   label_accessibilite VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Option(
    id_option INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label_option VARCHAR(255) NOT NULL,
+   label_option VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Region(
    id_region INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   nom_region VARCHAR(255) NOT NULL,
+   nom_region VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Departement(
