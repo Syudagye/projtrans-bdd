@@ -91,7 +91,6 @@ CREATE TABLE Hote(
 CREATE TABLE Langues(
    id_langue INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    langue VARCHAR(2) NOT NULL,
-   PRIMARY KEY(id_langue)
 );
 
 CREATE TABLE Hebergement(
