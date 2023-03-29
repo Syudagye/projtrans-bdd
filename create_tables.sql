@@ -1,11 +1,6 @@
 -- On se place sur la base de données "gites_de_france"
 USE gites_de_france;
 
--- On commence une transaction
--- Tout changements dans une transaction ne sera pas effectué avant un "COMMIT"
--- cela evite les effets innattendus en cas d'erreur
-BEGIN TRANSACTION;
-
 -- Creation des tables ne contenant pas de clés étrangères
 
 CREATE TABLE Utilisateur(
@@ -287,5 +282,3 @@ CREATE TABLE ReserverChambre(
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id_reservation),
    FOREIGN KEY(id_chambre) REFERENCES Chambre(id_chambre)
 );
-
-COMMIT;
