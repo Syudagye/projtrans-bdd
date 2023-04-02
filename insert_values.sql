@@ -1,30 +1,29 @@
--- On se place sur la base de données "gites_de_france"
-USE gites_de_france;
+-- ### Script d'insertion des données ###
 
-INSERT INTO Utilisateur 
-(nom, prenom, email, mdp, civilite, 
+INSERT INTO Utilisateur
+(nom, prenom, email, mdp, civilite,
 date_naissance, telephone, pays_residence,
-societe, adresse_postale, complement_adresse, 
+societe, adresse_postale, complement_adresse,
 code_postal, ville, cedex, date_creation, est_admin, photo_profil)
 VALUES
-    ('Dupont', 'Jean', 'jean.dupont@gmail.com', 'motdepasse1', 1, 
-    '1990-01-01', '0102030405', 'FR', 
+    ('Dupont', 'Jean', 'jean.dupont@gmail.com', 'motdepasse1', 1,
+    '1990-01-01', '0102030405', 'FR',
     'Société A', '1 Rue du Commerce', NULL,
     '75001', 'Paris', NULL, DATE(NOW()), 0, 'photo1.jpg'),
 
-    ('Durand', 'Sophie', 'sophie.durand@yahoo.com', 'motdepasse2', 0, 
-    '1995-02-15', '0607080910', 'FR', 
+    ('Durand', 'Sophie', 'sophie.durand@yahoo.com', 'motdepasse2', 0,
+    '1995-02-15', '0607080910', 'FR',
     'Société B', '2 Rue du Château', 'Bâtiment A, 3ème étage',
     '69002', 'Lyon', NULL, DATE(NOW()), 0, 'photo2.jpg'),
 
-    ('Martin', 'Pierre', 'pierre.martin@hotmail.com', 'motdepasse3', 1, 
+    ('Martin', 'Pierre', 'pierre.martin@hotmail.com', 'motdepasse3', 1,
     '1985-06-10', '0601020304', 'FR',
     'Société C', '3 Avenue des Fleurs', NULL,
     '13006', 'Marseille', NULL, DATE(NOW()), 1, 'photo3.jpg'),
 
     ('Lambert', 'Lucas', 'lucas.lambert@gmail.com', 'pass123', 1,
     '1990-07-23', '0612345678', 'FR',
-    'ACME', '5 rue des Champs', NULL, 
+    'ACME', '5 rue des Champs', NULL,
     '75001', 'Paris', NULL, DATE(NOW()), 0, 'default.png'),
 
     ('DUPOUY', 'Lucette', 'yvon.dupouy@orange.fr', 'motdepasse', 0,
@@ -44,7 +43,7 @@ VALUES
 
     ('Dupont', 'Jean', 'jean.dupont@yahoo.fr', 'password', 1,
     '1978-09-10', '0634567890', 'FR',
-    'Beta Corp.', '24 avenue des Peupliers', NULL, 
+    'Beta Corp.', '24 avenue des Peupliers', NULL,
     '31000', 'Toulouse', NULL, DATE(NOW()), 0, 'default.png'),
 
     ('DEMONT', 'Alexis', 'alexis.demont@gmeil.com', 'bestdelegue', 1,
@@ -120,7 +119,7 @@ VALUES
     ('Ecogîtes'),
     ('Télétravail'),
     ('Demeures de caractère'),
-    ('Montagne'), 
+    ('Montagne'),
     ('Mer'),
     ('A la ferme'),
     ('Bienvenue à la ferme'),
@@ -312,8 +311,8 @@ VALUES
 INSERT INTO Hebergement
 (coordonnees_latitude, coordonnees_longitude, caution,
 capacite, nbr_chambres, surface_habitable, type, periode_ouverture,
-commune, adresse_postale, code_postal, fiche_hebergement, 
-date_debut_saison, animaux_acceptes, reservable_en_ligne, 
+commune, adresse_postale, code_postal, fiche_hebergement,
+date_debut_saison, animaux_acceptes, reservable_en_ligne,
 trophees_clients, id_hote, id_departement, nombre_epis)
 VALUES
     (43.86293550, -1.35453090, 300.00,
@@ -322,7 +321,7 @@ VALUES
     '2023-04-01', 1, 1,
     0, 1, 41, 2),
     (43.65251600, -0.91739400, 100.00,
-    8, 4, 50, "Chambre d'hôtes", "Toute l'année", 
+    8, 4, 50, "Chambre d'hôtes", "Toute l'année",
     'CLERMONT', '490 Chemin de Provence', 40180, 'https://widget-fngf.itea.fr/fichePrint.php?ident=gites40_b2023.1.30415.H&exercice=2023&deb=13/04/2023&nbj=1&exe=2023',
     '2023-04-01', 0, 1,
     0, 2, 41, 3);
@@ -336,9 +335,9 @@ VALUES
 
 INSERT INTO Reservation
 (date_arrivee, date_depart, nombre_adultes, nombre_enfants,
-nombre_nourissons, civilite, nom, prenom, 
-adresse, code_postal, ville, pays, 
-telephone1, email, mdp, accepter_newsletter, 
+nombre_nourissons, civilite, nom, prenom,
+adresse, code_postal, ville, pays,
+telephone1, email, mdp, accepter_newsletter,
 payee, id_utilisateur, id_hebergement)
 VALUES
     ('2023-04-15', '2023-04-22', 2, 0,
@@ -355,7 +354,7 @@ VALUES
 
 INSERT INTO DemandeHebergement
 (nature_projet, commune,
-nom, prenom, email, telephone, 
+nom, prenom, email, telephone,
 message, date_creation, statut_verifie, id_departement, id_hote)
 VALUES
     ("Blablabla", 'MOLIETS',
@@ -375,7 +374,7 @@ VALUES
     ('CHAMBRE 1 : ROMANCE', 'https://widget-fngf.itea.fr/photos/gites40/G/photo9/30415.jpg',
     "Chambre pour une ou deux personnes joliment décorée dans le style romantique. Salle d'eau avec wc communicante et privée. 14 m². Télévision. Entièrement refaite en 2020",
     0, 1, 1, 0, 1, 1, 2),
-    
+
     ('CHAMBRE 2 : RIVAGE', "https://widget-fngf.itea.fr/photos/gites40/G/photo3/30415.jpg",
     "Chambre 2 personnes avec couchage en 160. Télévision, salle d'eau avec wc et fenêtre donnant sur la piscine et le jardin. Armoire de rangement. Entièrement refaite en 2021",
     0, 1, 1, 0, 1, 1, 2),

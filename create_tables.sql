@@ -1,7 +1,9 @@
--- On se place sur la base de données "gites_de_france"
-USE gites_de_france;
+-- ### Script de création des tables ###
 
--- Creation des tables ne contenant pas de clés étrangères
+
+-- ----------------------------------------------------------
+-- 1) Creation des tables ne contenant pas de clés étrangères
+-- ----------------------------------------------------------
 
 CREATE TABLE Utilisateur(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -97,6 +99,10 @@ CREATE TABLE Langue(
    langue VARCHAR(50) NOT NULL
 );
 
+
+-- -------------------------------------------
+-- 2) Creation des tables avec clés étrangères
+-- -------------------------------------------
 
 CREATE TABLE Hebergement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -240,6 +246,11 @@ CREATE TABLE DatesPeriodeSaison(
    id_periode INTEGER NOT NULL,
    FOREIGN KEY(id_periode) REFERENCES PeriodeSaison(id)
 );
+
+
+-- ---------------------------------
+-- 3) Creation des tables de liaison
+-- ---------------------------------
 
 CREATE TABLE Hebergement_Service(
    id_hebergement INTEGER NOT NULL,
