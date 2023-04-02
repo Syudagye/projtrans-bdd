@@ -1,6 +1,10 @@
-DROP DATABASE gites_de_france;
+-- Utiliser la requête suivante pour permettre de supprimer la BDD lors de tests des fichiers
+-- DROP DATABASE gites_de_france;
+
+-- On crée la BDD "gites_de_france"
 CREATE DATABASE gites_de_france;
--- On se place sur la base de données "gites_de_france"
+
+-- On se place sur la BDD "gites_de_france"
 USE gites_de_france;
 
 -- Creation des tables ne contenant pas de clés étrangères
@@ -15,7 +19,7 @@ CREATE TABLE Utilisateur(
    date_naissance DATE NOT NULL,
    telephone VARCHAR(20) NOT NULL,
    pays_residence VARCHAR(2) NOT NULL,
-   societe VARCHAR(255) NOT NULL,
+   societe VARCHAR(255),
    adresse_postale VARCHAR(255) NOT NULL,
    complement_adresse VARCHAR(255),
    code_postal VARCHAR(5) NOT NULL,
@@ -69,7 +73,12 @@ VALUES
     ('Dupont', 'Jean', 'jean.dupont@yahoo.fr', 'password', 1,
     '1978-09-10', '0634567890', 'FR',
     'Beta Corp.', '24 avenue des Peupliers', NULL, 
-    '31000', 'Toulouse', NULL, DATE(NOW()), 0, 'default.png');
+    '31000', 'Toulouse', NULL, DATE(NOW()), 0, 'default.png'),
+
+    ('DEMONT', 'Alexis', 'alexis.demont@gmeil.com', 'bestdelegue', 1,
+    '2004-06-30', '0612345678', 'FR',
+    NULL, '114 rue Lucien Faure', NULL,
+    '33000', 'Bordeaux', NULL, DATE(NOW()), 1, 'defaut.png');
 
 CREATE TABLE CategorieBien(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -134,7 +143,8 @@ INSERT INTO EquipementInt(label) VALUES
     ('Cheminée'),
     ('Sèche-linge'),
     ('Congélateur'),
-    ('Poêle à bois');
+    ('Poêle à bois'),
+    ('Micro-ondes');
 
 CREATE TABLE Classement(
    nombre_epis INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -424,6 +434,11 @@ CREATE TABLE Photo(
    id_hebergement INTEGER,
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
+INSERT INTO Photo(lien_cdn, id_hebergement) VALUES
+    ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/381396/381396-4_20795_23cfd4eddfe05f47eb76e27b6fe02ad9.jpg?itok=5ZdKALQr", 1),
+    ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/381396/381396-0_20795_d3687b70aec99d5ad3f1ba2e0db6d976.jpg?itok=OVqnzpw_", 1),
+    ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/400759/400759-0_30415_a66ad23d20e0935f16d6e9526ca09100.jpg?itok=DgdFwETt", 2),
+    ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/400759/400759-1_30415_207df419287d84be22ba5205dc68a769.jpg?itok=dzUQEiMJ", 2);
 
 CREATE TABLE Reservation(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -451,6 +466,24 @@ CREATE TABLE Reservation(
    FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id),
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
+INSERT INTO Reservation
+(date_arrivee, date_depart, nombre_adultes, nombre_enfants,
+nombre_nourissons, civilite, nom, prenom, 
+adresse, code_postal, ville, pays, 
+telephone1, email, mdp, accepter_newsletter, 
+payee, id_utilisateur, id_hebergement)
+VALUES
+    ('2023-04-15', '2023-04-22', 2, 0,
+    0, 'Mr.', 'DEMONT', 'Alexis',
+    '114 rue Lucien Faure', '33000', 'Bordeaux', 'FR',
+    '0612345678', 'alexis.demont@gmail.com', 'bestdelegue', 1,
+    1, 9, 1),
+
+    ('2023-06-10', '2023-06-11', 2, 1,
+    0, 'Mr.', 'RESSIOT', 'Samuel',
+    '113 rue Lucien Faure', '33290', 'Margaux', 'FR',
+    '0672598327', 'samortlamort@gmail.com', 'cbonpourvous', 0,
+    1, 9, 2);
 
 CREATE TABLE DemandeHebergement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -468,6 +501,15 @@ CREATE TABLE DemandeHebergement(
    FOREIGN KEY(id_departement) REFERENCES Departement(id),
    FOREIGN KEY(id_hote) REFERENCES Hote(id)
 );
+INSERT INTO DemandeHebergement
+(nature_projet, commune,
+nom, prenom, email, telephone, 
+message, date_creation, statut_verifie, id_departement, id_hote)
+VALUES
+    ("Blablabla", 'MOLIETS',
+    'DUPOUY', 'Lucette', 'yvon.dupouy@orange.fr', '0676705943',
+    "J'aimerai partager mon gîte à plus de monde",
+    '2018-01-03', 0, 41, 1);
 
 CREATE TABLE CodePromotionnel(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -478,6 +520,9 @@ CREATE TABLE CodePromotionnel(
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id),
    FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id)
 );
+INSERT INTO CodePromotionnel(code_promo, remise, id_reservation, id_utilisateur)
+VALUES
+    ('4dz6q4d46zq4dz1dz56q16d1zq65d1', 0.90, 1, 9);
 
 CREATE TABLE Chambre(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -489,14 +534,35 @@ CREATE TABLE Chambre(
    wc_privee BOOLEAN NOT NULL,
    salle_bain_privee BOOLEAN NOT NULL,
    douche_privees BOOLEAN NOT NULL,
+   tv_privee BOOLEAN NOT NULL,
    id_hebergement INTEGER NOT NULL,
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
+INSERT INTO Chambre
+(nom, photo,
+description,
+nbr_lits_simple, nbr_lits_double, wc_privee, salle_bain_privee, douche_privees, tv_privee, id_hebergement)
+VALUES
+    ('CHAMBRE 1 : ROMANCE', 'https://widget-fngf.itea.fr/photos/gites40/G/photo9/30415.jpg',
+    "Chambre pour une ou deux personnes joliment décorée dans le style romantique. Salle d'eau avec wc communicante et privée. 14 m². Télévision. Entièrement refaite en 2020",
+    0, 1, 1, 0, 1, 1, 2),
+    
+    ('CHAMBRE 2 : RIVAGE', "https://widget-fngf.itea.fr/photos/gites40/G/photo3/30415.jpg",
+    "Chambre 2 personnes avec couchage en 160. Télévision, salle d'eau avec wc et fenêtre donnant sur la piscine et le jardin. Armoire de rangement. Entièrement refaite en 2021",
+    0, 1, 1, 0, 1, 1, 2),
+
+    ('CHAMBRE 3 : RIVIERA', 'https://widget-fngf.itea.fr/photos/gites40/G/photo7/30415.jpg',
+    "Petite chambre avec lit 160 ou 2 lits 80 si séparés, placard, bureau et salle d'eau avec wc. Entièrement refaite en 2021",
+    0, 1, 1, 0, 1, 1, 2),
+
+    ('CHAMBRE 4 : LE SALEYA', 'https://widget-fngf.itea.fr/photos/gites40/G/photo30/30415.jpg',
+    "Chambre en annexe, environ 20 m², style chalet. Couchage en 160, salle d'eau privative avec wc. Terrasse privative avec mobilier de jardin. Entièrement refaite en 2019",
+    0, 1, 1, 0, 1, 1, 2);
 
 CREATE TABLE Avis(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    note_generale INTEGER NOT NULL,
-   note_proprietee INTEGER NOT NULL,
+   note_proprete INTEGER NOT NULL,
    note_accueil INTEGER NOT NULL,
    note_confort INTEGER NOT NULL,
    note_rapportQP INTEGER NOT NULL,
@@ -509,6 +575,14 @@ CREATE TABLE Avis(
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id),
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
+INSERT INTO Avis
+(note_generale, note_proprete, note_accueil, note_confort, note_rapportQP,
+date_deposition, commentaire, id_reservation, id_hebergement)
+VALUES
+    (5, 5, 5, 5, 5,
+    '2022-04-12', "Une très bonne adresse. Idéalement placé dans le charmant pays de la Chalosse pour visiter les Landes, le Bordelais ou le Pays-Basque. Les chambres sont refaites à neufs et parfaites pour quelques nuits.
+    Les propriétaires sont très acceuillants et serviables. Une des meilleures adresses Gîtes de France où nous avons séjourné.",
+    1, 2);
 
 CREATE TABLE Assurance(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -517,6 +591,9 @@ CREATE TABLE Assurance(
    id_reservation INTEGER,
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id)
 );
+INSERT INTO Assurance(pays, lien_pdf, id_reservation)
+VALUES
+    ('FR', 'gites-de-france/assurances/MaisonLandaise.pdf', 1);
 
 CREATE TABLE PeriodeSaison(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -541,6 +618,15 @@ CREATE TABLE Hebergement_Service(
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id),
    FOREIGN KEY(id_service) REFERENCES Service(id)
 );
+INSERT INTO Hebergement_Service(id_hebergement, id_service)
+VALUES
+    (1, 7),
+    (2, 3),
+    (2, 5),
+    (2, 6),
+    (2, 7),
+    (2, 10),
+    (2, 13);
 
 CREATE TABLE Accessibilite_Hebergement(
    id_hebergement INTEGER NOT NULL,
@@ -557,6 +643,13 @@ CREATE TABLE Hebergement_ThemeSejour(
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id),
    FOREIGN KEY(id_theme_sejour) REFERENCES ThemeSejour(id)
 );
+INSERT INTO Hebergement_ThemeSejour(id_hebergement, id_theme_sejour)
+VALUES
+    (1, 9),
+    (1, 6),
+    (2, 9),
+    (2, 11),
+    (2, 22);
 
 CREATE TABLE EquipementInt_Hebergement(
    id_hebergement INTEGER NOT NULL,
@@ -565,6 +658,14 @@ CREATE TABLE EquipementInt_Hebergement(
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id),
    FOREIGN KEY(id_equipement_int) REFERENCES EquipementInt(id)
 );
+INSERT INTO EquipementInt_Hebergement(id_hebergement, id_equipement_int)
+VALUES
+    (1, 1),
+    (1, 3),
+    (1, 5),
+    (1, 4),
+    (1, 10),
+    (1, 11);
 
 CREATE TABLE EquipementExt_Hebergement(
    id_hebergement INTEGER NOT NULL,
@@ -573,6 +674,21 @@ CREATE TABLE EquipementExt_Hebergement(
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id),
    FOREIGN KEY(id_equipement_ext) REFERENCES EquipementExt(id)
 );
+INSERT INTO EquipementExt_Hebergement(id_hebergement, id_equipement_ext)
+VALUES
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (1, 7),
+    (1, 9),
+    (1, 10),
+
+    (2, 2),
+    (2, 3),
+    (2, 5),
+    (2, 6),
+    (2, 7),
+    (2, 10);
 
 CREATE TABLE Hebergement_OptionHebergement(
    id_hebergement INTEGER NOT NULL,
@@ -581,6 +697,14 @@ CREATE TABLE Hebergement_OptionHebergement(
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id),
    FOREIGN KEY(id_option) REFERENCES OptionHebergement(id)
 );
+INSERT INTO Hebergement_OptionHebergement(id_hebergement, id_option)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+
+    (2, 7),
+    (2, 8);
 
 CREATE TABLE CategorieBien_Hebergement(
    id_hebergement INTEGER NOT NULL,
@@ -597,6 +721,11 @@ CREATE TABLE Hote_Langue(
    FOREIGN KEY(id_hote) REFERENCES Hote(id),
    FOREIGN KEY(id_langue) REFERENCES Langue(id)
 );
+INSERT INTO Hote_Langue(id_hote, id_langue)
+VALUES
+    (1, 1),
+    (1, 3),
+    (2, 1);
 
 CREATE TABLE Chambre_Reservation(
    id_reservation INTEGER NOT NULL,
@@ -605,3 +734,8 @@ CREATE TABLE Chambre_Reservation(
    FOREIGN KEY(id_reservation) REFERENCES Reservation(id),
    FOREIGN KEY(id_chambre) REFERENCES Chambre(id)
 );
+INSERT INTO Chambre_Reservation(id_reservation, id_chambre)
+VALUES
+    (2, 1),
+    (2, 3),
+    (2, 4);
