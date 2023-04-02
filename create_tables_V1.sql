@@ -13,7 +13,7 @@ CREATE TABLE Utilisateur(
    date_naissance DATE NOT NULL,
    telephone VARCHAR(20) NOT NULL,
    pays_residence VARCHAR(2) NOT NULL,
-   societe VARCHAR(255) NOT NULL,
+   societe VARCHAR(255),
    adresse_postale VARCHAR(255) NOT NULL,
    complement_adresse VARCHAR(255),
    code_postal VARCHAR(5) NOT NULL,
@@ -26,53 +26,53 @@ CREATE TABLE Utilisateur(
 
 CREATE TABLE CategorieBien(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Service(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE EquipementInt(
-   id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE EquipementExt(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE EquipementInt(
+   id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Classement(
    nombre_epis INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE ThemeSejour(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Accessibilite(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE OptionHebergement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   label VARCHAR(255) NOT NULL
+   label VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Region(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   nom VARCHAR(255) NOT NULL
+   nom VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Departement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   code VARCHAR(255) NOT NULL,
-   nom VARCHAR(255) NOT NULL,
+   code VARCHAR(255) NOT NULL UNIQUE,
+   nom VARCHAR(255) NOT NULL UNIQUE,
    id_region INTEGER NOT NULL,
    FOREIGN KEY(id_region) REFERENCES Region(id)
 );
@@ -82,14 +82,19 @@ CREATE TABLE Hote(
    nom VARCHAR(255) NOT NULL,
    date_labellise DATE NOT NULL,
    telephone VARCHAR(20) NOT NULL,
-   email VARCHAR(320) NOT NULL,
+   email VARCHAR(320) NOT NULL
+);
+
+CREATE TABLE Hote_Utilisateur(
+   id_hote INTEGER NOT NULL,
    id_utilisateur INTEGER NOT NULL,
+   FOREIGN KEY(id_hote) REFERENCES Hote(id),
    FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id)
 );
 
 CREATE TABLE Langue(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-   langue VARCHAR(2) NOT NULL
+   langue VARCHAR(50) NOT NULL
 );
 
 
@@ -99,6 +104,7 @@ CREATE TABLE Hebergement(
    coordonnees_longitude DECIMAL(10,8) NOT NULL,
    caution DECIMAL(15,2) NOT NULL,
    capacite INTEGER NOT NULL,
+   nbr_chambres INTEGER NOT NULL,
    surface_habitable INTEGER NOT NULL,
    type VARCHAR(255) NOT NULL,
    periode_ouverture VARCHAR(255) NOT NULL,
@@ -189,6 +195,7 @@ CREATE TABLE Chambre(
    wc_privee BOOLEAN NOT NULL,
    salle_bain_privee BOOLEAN NOT NULL,
    douche_privees BOOLEAN NOT NULL,
+   tv_privee BOOLEAN NOT NULL,
    id_hebergement INTEGER NOT NULL,
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
@@ -196,7 +203,7 @@ CREATE TABLE Chambre(
 CREATE TABLE Avis(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    note_generale INTEGER NOT NULL,
-   note_proprietee INTEGER NOT NULL,
+   note_proprete INTEGER NOT NULL,
    note_accueil INTEGER NOT NULL,
    note_confort INTEGER NOT NULL,
    note_rapportQP INTEGER NOT NULL,
