@@ -124,6 +124,14 @@ CREATE TABLE Hebergement(
    FOREIGN KEY(nombre_epis) REFERENCES Classement(nombre_epis)
 );
 
+CREATE TABLE Disponibilite(
+   id INTEGR PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   date_debut DATE NOT NULL,
+   date_fin DATE NOT NULL,
+   id_hebergement INTEGER NOT NULL,
+   FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
+)
+
 CREATE TABLE Photo(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    lien_cdn VARCHAR(255),
