@@ -1,5 +1,5 @@
 -- Utiliser la requête suivante pour permettre de supprimer la BDD lors de tests des fichiers
--- DROP DATABASE gites_de_france;
+DROP DATABASE gites_de_france;
 
 -- On crée la BDD "gites_de_france"
 CREATE DATABASE gites_de_france;
