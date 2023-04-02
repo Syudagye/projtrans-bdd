@@ -8,7 +8,7 @@ CREATE DATABASE gites_de_france;
 USE gites_de_france;
 
 -- Creation des tables
-\source ./create_tables.sql
+source create_tables.sql
 
 -- Insertion des données
-\source ./insert_values.sql
+source insert_values.sql
