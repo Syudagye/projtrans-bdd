@@ -10,20 +10,20 @@ SELECT
     JSON_ARRAYAGG(DISTINCT ThemeSejour.label) as theme,
     JSON_ARRAYAGG(DISTINCT Accessibilite.label) as accessibilite,
     JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
-            "date_debut", Disponibilite.date_debut,
-            "date_fin", Disponibilite.date_fin,
+            'date_debut', Disponibilite.date_debut,
+            'date_fin', Disponibilite.date_fin,
     )) as dates_sejour,
     JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
-            "code", Departement.code,
-            "nom", Departement.nom,
+            'code', Departement.code,
+            'nom', Departement.nom,
     )) as departement,
     Hote.*,
     JSON_ARRAYAGG(DISTINCT Photo.lien_cdn) as photos,
     Chambre.*,
     Avis.*,
     JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
-            "nom", PeriodeSaison.nom,
-            "tarif", PeriodeSaison.tarif,
+            'nom', PeriodeSaison.nom,
+            'tarif', PeriodeSaison.tarif,
     )) as tarifs,
     JSON_ARRAYAGG(DISTINCT Classement.label) as classement
 FROM Hebergement
