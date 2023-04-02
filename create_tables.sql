@@ -136,7 +136,7 @@ CREATE TABLE Disponibilite(
    date_fin DATE NOT NULL,
    id_hebergement INTEGER NOT NULL,
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
-)
+);
 
 CREATE TABLE Photo(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
