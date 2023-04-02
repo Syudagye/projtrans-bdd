@@ -24,6 +24,6 @@ D'autre fichiers sont aussi à votre disposition:
 Cette repository contient les script permettant la création et l'initialisation de la base de données, ainsi que les 5 scripts demandés dans le cahier des charges.
 
 Les scripts:
-- [`create_tables.sql`](https://github.com/Syudagye/projtrans-bdd/blob/master/create_tables_V1.sql) - Script de création des tables de la base de donnée
+- [`create_tables.sql`](https://github.com/Syudagye/projtrans-bdd/blob/master/create_tables.sql) - Script de création des tables de la base de donnée
 - [`insert_values.sql`](https://github.com/Syudagye/projtrans-bdd/blob/master/insert_values.sql) - Script d'insertion des données exemples
 - [`all_requests.sql`](https://github.com/Syudagye/projtrans-bdd/blob/master/all_requests.sql) - Script regroupant les deux premiers et permettant la création de la base de donnée MySQL (Utilisée pour faciliter les tests).
