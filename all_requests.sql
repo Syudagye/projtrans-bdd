@@ -84,7 +84,8 @@ CREATE TABLE CategorieBien(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO CategorieBien(label) VALUES
+INSERT INTO CategorieBien(label)
+VALUES
     ('Insolite'),
     ('Citybreak'),
     ('Maison de plain pied'),
@@ -94,7 +95,8 @@ CREATE TABLE Service(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO Service(label) VALUES
+INSERT INTO Service(label)
+VALUES
     ('Point de recharge électrique'),
     ('Tout compris'),
     ('Spa'),
@@ -117,7 +119,8 @@ CREATE TABLE EquipementExt(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO EquipementExt(label) VALUES 
+INSERT INTO EquipementExt(label)
+VALUES
     ('Point de recharge électrique'),
     ('Piscine'),
     ('Terrain clos'),
@@ -133,7 +136,8 @@ CREATE TABLE EquipementInt(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO EquipementInt(label) VALUES
+INSERT INTO EquipementInt(label)
+VALUES
     ('Poêle à pellets'),
     ('Piscine intérieure'),
     ('Télévision'),
@@ -150,7 +154,8 @@ CREATE TABLE Classement(
    nombre_epis INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO Classement(label) VALUES
+INSERT INTO Classement(label)
+VALUES
     ('1 épi'),
     ('2 épis'),
     ('3 epis / Confort'),
@@ -161,7 +166,8 @@ CREATE TABLE ThemeSejour(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO ThemeSejour(label) VALUES
+INSERT INTO ThemeSejour(label)
+VALUES
     ('Ecogestes'),
     ('Ecogîtes'),
     ('Télétravail'),
@@ -190,7 +196,8 @@ CREATE TABLE Accessibilite(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO Accessibilite(label) VALUES
+INSERT INTO Accessibilite(label)
+VALUES
     ('Handicap mental'),
     ('Handicap moteur'),
     ('Handicap auditif'),
@@ -200,7 +207,8 @@ CREATE TABLE OptionHebergement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    label VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO OptionHebergement(label) VALUES
+INSERT INTO OptionHebergement(label)
+VALUES
     ('Ménage fin de séjour'),
     ('Draps lit 2 personnes'),
     ('Draps lit 1 personne'),
@@ -214,7 +222,8 @@ CREATE TABLE Region(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    nom VARCHAR(255) NOT NULL UNIQUE
 );
-INSERT INTO Region(nom) VALUES 
+INSERT INTO Region(nom)
+VALUES
     ('Alsace'),
     ('Aquitaine'),
     ('Auvergne'),
@@ -245,7 +254,8 @@ CREATE TABLE Departement(
    id_region INTEGER NOT NULL,
    FOREIGN KEY(id_region) REFERENCES Region(id)
 );
-INSERT INTO Departement(code, nom, id_region) VALUES
+INSERT INTO Departement(code, nom, id_region)
+VALUES
     ('01', 'Ain', 20),
     ('02', 'Aisne', 17),
     ('03', 'Allier', 3),
@@ -355,7 +365,8 @@ CREATE TABLE Hote(
    telephone VARCHAR(20) NOT NULL,
    email VARCHAR(320) NOT NULL
 );
-INSERT INTO Hote(nom, date_labellise, telephone, email) VALUES
+INSERT INTO Hote(nom, date_labellise, telephone, email)
+VALUES
     ('La maison landaise de Mâa', '2018-03-16', '0558487601', 'yvon.dupouy@orange.fr'),
     ('La Forge de Clermont', '2017-05-01', '0558893176', 'veroniquebudai@outlook.fr');
 
@@ -365,7 +376,8 @@ CREATE TABLE Hote_Utilisateur(
    FOREIGN KEY(id_hote) REFERENCES Hote(id),
    FOREIGN KEY(id_utilisateur) REFERENCES Utilisateur(id)
 );
-INSERT INTO Hote_Utilisateur(id_hote, id_utilisateur) VALUES
+INSERT INTO Hote_Utilisateur(id_hote, id_utilisateur)
+VALUES
     (1, 6),
     (2, 7),
     (2, 8);
@@ -374,7 +386,8 @@ CREATE TABLE Langue(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
    langue VARCHAR(50) NOT NULL
 );
-INSERT INTO Langue(langue) VALUES
+INSERT INTO Langue(langue)
+VALUES
     ('Français'),
     ('Anglais'),
     ('Espagnol'),
@@ -383,7 +396,6 @@ INSERT INTO Langue(langue) VALUES
     ('Brésilien'),
     ('Chinois'),
     ('Russe');
-
 
 CREATE TABLE Hebergement(
    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -434,7 +446,8 @@ CREATE TABLE Photo(
    id_hebergement INTEGER,
    FOREIGN KEY(id_hebergement) REFERENCES Hebergement(id)
 );
-INSERT INTO Photo(lien_cdn, id_hebergement) VALUES
+INSERT INTO Photo(lien_cdn, id_hebergement)
+VALUES
     ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/381396/381396-4_20795_23cfd4eddfe05f47eb76e27b6fe02ad9.jpg?itok=5ZdKALQr", 1),
     ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/381396/381396-0_20795_d3687b70aec99d5ad3f1ba2e0db6d976.jpg?itok=OVqnzpw_", 1),
     ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/400759/400759-0_30415_a66ad23d20e0935f16d6e9526ca09100.jpg?itok=DgdFwETt", 2),
