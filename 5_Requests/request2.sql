@@ -1,19 +1,31 @@
 -- ~~~~~ 2e Requête : Affichage 1~~~~~
 
-SELECT 
-Hebergement.*,
-DISTING JSON_ARRAYAGG(DEquipementExt.label),
-JSON_ARRAYAGG(EquipementInt.label),
-JSON_ARRAYAGG(OptionHebergement.label),
-JSON_ARRAYAGG(Service.label),
-JSON_ARRAYAGG(ThemeSejour.label),
-GROUP_CONCAT(Departement.code, Departement.nom SEPARATOR ' ,'),
-Hote.*,
-JSON_ARRAYAGG(Photo.lien_cdn),
-Chambre.*,
-Avis.*,
-Classement.label
-
+SELECT
+    Hebergement.*,
+    JSON_ARRAYAGG(DISTINCT EquipementExt.label) as equipement_exterieur,
+    JSON_ARRAYAGG(DISTINCT EquipementInt.label) as equipement_interieur,
+    JSON_ARRAYAGG(DISTINCT CategorieBien.label) as categories_bien,
+    JSON_ARRAYAGG(DISTINCT OptionHebergement.label) as options_hebergement,
+    JSON_ARRAYAGG(DISTINCT Service.label) as services,
+    JSON_ARRAYAGG(DISTINCT ThemeSejour.label) as theme,
+    JSON_ARRAYAGG(DISTINCT Accessibilite.label) as accessibilite,
+    JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
+            'date_debut', Disponibilite.date_debut,
+            'date_fin', Disponibilite.date_fin
+    )) as dates_sejour,
+    JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
+            'code', Departement.code,
+            'nom', Departement.nom
+    )) as departement,
+    Hote.*,
+    JSON_ARRAYAGG(DISTINCT Photo.lien_cdn) as photos,
+    Chambre.*,
+    Avis.*,
+    JSON_ARRAYAGG(DISTINCT JSON_OBJECT(
+            'nom', PeriodeSaison.nom,
+            'tarif', PeriodeSaison.tarif
+    )) as tarifs,
+    JSON_ARRAYAGG(DISTINCT Classement.label) as classement
 FROM Hebergement
 
 LEFT JOIN EquipementExt_Hebergement ON Hebergement.id = EquipementExt_Hebergement.id_hebergement
@@ -31,6 +43,11 @@ LEFT JOIN Service ON Hebergement_Service.id_service = Service.id
 
 LEFT JOIN Hebergement_ThemeSejour ON Hebergement.id = Hebergement_ThemeSejour.id_hebergement
 LEFT JOIN ThemeSejour ON Hebergement_ThemeSejour.id_theme_sejour = ThemeSejour.id
+
+LEFT JOIN Accessibilite_Hebergement ON Hebergement.id = Accessibilite_Hebergement.id_hebergement
+LEFT JOIN Accessibilite ON Accessibilite_Hebergement.id_accessible = Accessibilite.id
+
+LEFT JOIN Disponibilite ON Hebergement.id = Disponibilite.id_hebergement
 
 LEFT JOIN Departement ON Hebergement.id_departement = Departement.id
 
