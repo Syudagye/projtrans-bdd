@@ -327,6 +327,13 @@ VALUES
     '2023-04-01', 0, 1,
     0, 2, 41, 3);
 
+INSERT INTO Disponibilite(date_debut, date_fin, id_hebergement)
+VALUES
+    ('2023-04-04', '2023-04-15', 1),
+    ('2023-04-17', '2023-04-30', 1),
+    ('2023-04-04', '2023-04-13', 2),
+    ('2023-04-17', '2023-04-28', 2),
+
 INSERT INTO Photo(lien_cdn, id_hebergement)
 VALUES
     ("https://www.gites-de-france.com/sites/default/files/styles/gallery/public/images/381396/381396-4_20795_23cfd4eddfe05f47eb76e27b6fe02ad9.jpg?itok=5ZdKALQr", 1),
@@ -464,3 +471,4 @@ VALUES
     (2, 1),
     (2, 3),
     (2, 4);
+
