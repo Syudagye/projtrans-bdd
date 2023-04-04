@@ -1,4 +1,5 @@
 -- ~~~~~ 4e Requête : Supression ~~~~~
+USE gites_de_france;
 
 DELETE FROM Avis 
 WHERE id=(SELECT Avis.id FROM Avis

@@ -1,4 +1,5 @@
 -- ~~~~~ 1e Requête : Insertion ~~~~~
+USE gites_de_france;
 
 INSERT INTO Hebergement
 (coordonnees_latitude, coordonnees_longitude, caution,

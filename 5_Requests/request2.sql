@@ -1,4 +1,5 @@
 -- ~~~~~ 2e Requête : Affichage 1~~~~~
+USE gites_de_france;
 
 SELECT
     Hebergement.*,

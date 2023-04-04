@@ -1,4 +1,5 @@
 -- ~~~~~ 5e Requête : Affichage 3~~~~~
+USE gites_de_france;
 
 SELECT * FROM Hebergement
 INNER JOIN Departement ON Hebergement.id_departement = Departement.id
